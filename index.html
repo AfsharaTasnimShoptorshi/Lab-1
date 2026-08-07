@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Coursework Board — Student Task Manager</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Zilla+Slab:wght@400;500;600;700&family=Inter:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<header class="banner">
+  <div class="banner-inner">
+    <div class="banner-left">
+      <span class="eyebrow">Coursework Board</span>
+      <h1>Keep every assignment pinned down.</h1>
+    </div>
+    <nav class="tabs" role="tablist" aria-label="Board sections">
+      <button class="tab is-active" data-view="board" role="tab" aria-selected="true">Board</button>
+      <button class="tab" data-view="info" role="tab" aria-selected="false">Project Info</button>
+    </nav>
+  </div>
+</header>
+
+<main>
+
+  <!-- BOARD VIEW -->
+  <section id="view-board" class="view is-active">
+
+    <div class="board-toolbar">
+      <div class="filters" role="tablist" aria-label="Filter tasks">
+        <button class="filter is-active" data-filter="all">All <span class="count" id="count-all">0</span></button>
+        <button class="filter" data-filter="pending">Pending <span class="count" id="count-pending">0</span></button>
+        <button class="filter" data-filter="completed">Completed <span class="count" id="count-completed">0</span></button>
+      </div>
+      <button id="new-task-btn" class="btn-pin">+ New card</button>
+    </div>
+
+    <!-- New task card (hidden by default) -->
+    <form id="task-form" class="card new-card" hidden>
+      <div class="pin" aria-hidden="true"></div>
+      <label class="field">
+        <span>Title</span>
+        <input type="text" id="task-title" placeholder="e.g. Finish CSE 3200 lab report" required maxlength="80">
+      </label>
+      <label class="field">
+        <span>Notes</span>
+        <textarea id="task-notes" placeholder="Anything worth remembering about this one" rows="2" maxlength="200"></textarea>
+      </label>
+      <div class="field-row">
+        <label class="field">
+          <span>Due date</span>
+          <input type="date" id="task-due">
+        </label>
+        <label class="field">
+          <span>Priority</span>
+          <select id="task-priority">
+            <option value="low">Low</option>
+            <option value="medium" selected>Medium</option>
+            <option value="high">High</option>
+          </select>
+        </label>
+      </div>
+      <div class="form-actions">
+        <button type="button" id="cancel-task-btn" class="btn-ghost">Cancel</button>
+        <button type="submit" class="btn-solid">Pin to board</button>
+      </div>
+    </form>
+
+    <div id="empty-state" class="empty-state" hidden>
+      <p>Nothing here yet.</p>
+      <p class="muted">Add a card and it'll show up on the board.</p>
+    </div>
+
+    <div id="task-grid" class="task-grid"></div>
+
+  </section>
+
+  <!-- PROJECT INFO VIEW -->
+  <section id="view-info" class="view">
+    <div class="syllabus">
+      <div class="syllabus-header">
+        <span class="eyebrow">Project Info</span>
+        <h2>Student Task Management System</h2>
+      </div>
+
+      <dl class="syllabus-grid">
+        <div class="syllabus-row">
+          <dt>Purpose</dt>
+          <dd>A lightweight board for tracking coursework: view tasks, add new ones, and mark them done — no server, no database, no login.</dd>
+        </div>
+        <div class="syllabus-row">
+          <dt>Author</dt>
+          <dd id="info-author">Shoptorshi</dd>
+        </div>
+        <div class="syllabus-row">
+          <dt>Programme</dt>
+          <dd id="info-programme">B.Sc. in Computer Science &amp; Engineering, RUET</dd>
+        </div>
+        <div class="syllabus-row">
+          <dt>Technologies</dt>
+          <dd>
+            <ul class="tech-list">
+              <li><span class="tech-dot" style="--dot: var(--coral)"></span>HTML — page structure</li>
+              <li><span class="tech-dot" style="--dot: var(--amber)"></span>CSS — layout and styling</li>
+              <li><span class="tech-dot" style="--dot: var(--teal)"></span>JavaScript — task logic &amp; storage</li>
+            </ul>
+          </dd>
+        </div>
+        <div class="syllabus-row">
+          <dt>Data storage</dt>
+          <dd>Tasks are saved to the browser's local storage, so a refresh won't lose them — but they live only on this device and this browser.</dd>
+        </div>
+        <div class="syllabus-row">
+          <dt>Status</dt>
+          <dd><span class="stamp-inline">In progress</span></dd>
+        </div>
+      </dl>
+    </div>
+  </section>
+
+</main>
+
+<script src="script.js"></script>
+</body>
+</html>
